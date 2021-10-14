@@ -45,7 +45,6 @@ Server
 猪 = 8#10回合飞任何地方， 下回合直接移动，休息10回合# C
 鲸鱼 = 9 #1
 """
-#jingyu 有bug 西巴 line 230
 soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 soc.bind((socket.gethostname(),6666))
 print('Server ip address: ', (socket.gethostname(),6666))
