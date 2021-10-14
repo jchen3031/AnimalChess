@@ -45,8 +45,10 @@ Server
 猪 = 8#10回合飞任何地方， 下回合直接移动，休息10回合# C
 鲸鱼 = 9 #1
 """
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
 soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-soc.bind((socket.gethostname(),6666))
+soc.bind((local_ip,6666))
 print('Server ip address: ', (socket.gethostname(),6666))
 soc.listen(5)
 client,addr = soc.accept()
