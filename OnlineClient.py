@@ -48,7 +48,7 @@ Client
 """
 'OIT-C0LLYD3'
 Server = input('Server')
-if Server == 0:
+if Server == '':
     Server = 'OIT-C0LLYD3'
 d = {1:'猴',2:'金鱼',3:'鸡',4:'鹅',5:'驴',6:'马', 7:'猴',8:'猪',9:'鲸鱼'}
 p = util.Painting()
