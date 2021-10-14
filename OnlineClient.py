@@ -47,6 +47,7 @@ Client
 鲸鱼 = 9 #1
 """
 #jingyu 有bug 西巴 line 230
+Server = 'OIT-C0LLYD3'
 d = {1:'猴',2:'金鱼',3:'鸡',4:'鹅',5:'驴',6:'马', 7:'猴',8:'猪',9:'鲸鱼'}
 p = util.Painting()
 screen = pygame.display.set_mode((960, 640), 0, 64)
@@ -80,7 +81,7 @@ fly1 = 0
 fly2 = 0
 auto1 = False
 auto2 = False
-net = NetWork()
+net = NetWork(server = Server)
 GarbageCollection = 0
 # s = socket.socket()
 # # s.connect(('128.61.16.1', 6666))
@@ -159,6 +160,7 @@ while True:
                     player = not player  
                     select = not select
                     util.passOneRound(animal)
+                    net.update(animal)
                     print('one round')
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 
@@ -407,11 +409,13 @@ while True:
                 select = not select
     else:
         getdata = net.client.recv(40960)
+        text = 'Waitting'
         if getdata != 0:
             loads = pickle.loads(getdata)
             if not animal.equal(loads):
                 animal = loads
                 player = not player
+                text = 'Your turn'
     #print(getdata)
     #player = True
     screen.fill((255,255,255))
