@@ -48,6 +48,8 @@ Client
 """
 'OIT-C0LLYD3'
 Server = input('Server')
+if Server == 0:
+    Server = 'OIT-C0LLYD3'
 d = {1:'猴',2:'金鱼',3:'鸡',4:'鹅',5:'驴',6:'马', 7:'猴',8:'猪',9:'鲸鱼'}
 p = util.Painting()
 screen = pygame.display.set_mode((960, 640), 0, 64)
@@ -83,19 +85,6 @@ auto1 = False
 auto2 = False
 net = NetWork(server = Server)
 GarbageCollection = 0
-# s = socket.socket()
-# # s.connect(('128.61.16.1', 6666))
-# soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
-# # 绑定本机ip和端口号
-# soc.connect(('128.61.17.249', 8089))
-
-# print(soc.recv(40960).decode('utf-8'))
-# for data in [b'mich',b'trac']:
-#     soc.send(data)
-#     print(soc.recv(1024).decode('utf-8'))
-# soc.send(b'exit')
-# b = Board.Animal()
 
 while True:
     #print(clock.get_fps())
