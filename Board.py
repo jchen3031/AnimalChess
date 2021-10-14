@@ -19,13 +19,14 @@ class Board:
                 if (j!= 0 and j!=3 and j!=6):
                     x[j][i] = 1
         x[3][0] = 4
-        x[3][8] = 5
-        x[3][1] = 3
-        x[4][0] = 3
-        x[2][0] = 3
-        x[3][7] = 3
-        x[4][8] = 3
-        x[2][8] = 3
+        x[3][8] = 4
+        x[3][4] = 4
+        # x[3][1] = 3
+        # x[4][0] = 3
+        # x[2][0] = 3
+        # x[3][7] = 3
+        # x[4][8] = 3
+        # x[2][8] = 3
         self.board = x
         self.x,self.y = x.shape
     def put(self, pos, n):
@@ -44,11 +45,12 @@ class Animal:
         x[1][1] = Animals.Horse(True)
         x[6][0] = Animals.Pig(True)
         x[5][1] = Animals.Monkey(True)
-        #x[0][2] = [5,True]
         x[0][2] = Animals.Donkey(True)
         x[2][2] = Animals.Goose(True)
         x[4][2] = Animals.GoldFish(True)
         x[6][2] = Animals.Chick(True)
+        # x[6][2] = Animals.Chick(True)
+        # x[0][2] = Animals.Donkey(True)
         self.board = x.copy()
         self.reflect()
         self.x,self.y = x.shape
@@ -64,3 +66,26 @@ class Animal:
                 if self.board[i][j]!=None:
                     self.board[m-1-i][n-1-j] = self.board[i,j].clone()
                     self.board[m-1-i][n-1-j].player = not self.board[i,j].player
+    def __str__(self):
+        return str(self.board)
+    def __repr__(self):
+        return self.board
+    def __iter__(self):
+        self.ix = 0
+        self.iy = 0
+        return self
+    def __next__(self):
+        if self.ix <= self.x-1:
+            i = self.ix
+            self.ix += 1
+            return self.board[i,self.iy]
+        elif self.iy < self.y-1:
+            self.ix = 0
+            i = self.ix
+            self.ix += 1
+            self.iy += 1
+            return self.board[i,self.iy]
+        else:
+            raise StopIteration
+    def equal(self,b):
+        return self.__str__()==b.__str__()
