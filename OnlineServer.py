@@ -48,6 +48,7 @@ Server
 #jingyu 有bug 西巴 line 230
 soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 soc.bind((socket.gethostname(),6666))
+print('Server ip address: ', (socket.gethostname(),6666))
 soc.listen(5)
 client,addr = soc.accept()
 d = {1:'猴',2:'金鱼',3:'鸡',4:'鹅',5:'驴',6:'马', 7:'猴',8:'猪',9:'鲸鱼'}
@@ -162,6 +163,8 @@ while True:
                     player = not player  
                     select = not select
                     util.passOneRound(animal)
+                    msg = pickle.dumps(animal)
+                    client.send(msg)
                     print('one round')
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 
@@ -418,12 +421,14 @@ while True:
     else:
         data = client.recv(40960)
         # print(data)
+        text = 'Waitting'
         if data != 0:
             loads = pickle.loads(data)
             print(animal.equal(loads))
             if not animal.equal(loads):
                 animal = loads
                 player = not player
+                text = 'Your turn'
         # helpjgrecv = False
     screen.fill((255,255,255))
     for i in range(b.x):
