@@ -46,7 +46,8 @@ Client
 猪 = 8#10回合飞任何地方， 下回合直接移动，休息10回合# C
 鲸鱼 = 9 #1
 """
-Server = 'OIT-C0LLYD3'
+'OIT-C0LLYD3'
+Server = input('Server')
 d = {1:'猴',2:'金鱼',3:'鸡',4:'鹅',5:'驴',6:'马', 7:'猴',8:'猪',9:'鲸鱼'}
 p = util.Painting()
 screen = pygame.display.set_mode((960, 640), 0, 64)
