@@ -163,3 +163,38 @@ def pigEvolution(pos,b,player):
                 if b[i,j]!=None and b[i,j].player!=player:
                     b[i,j] = None
     return b
+def pigMove(animal,fly1,p1pig):
+    newP = animal.get(fly1[1])
+    if p1pig.eat>3:
+        print('complete evolution')
+        animal.put(fly1[1],p1pig)
+        animal.board = pigEvolution(fly1[1], animal.board,p1pig.player)
+    elif newP == None:
+        animal.put(fly1[1],p1pig)
+    elif newP.V!=9:
+        p1pig.eat+=1
+        animal.put(fly1[1],p1pig)
+    else:
+        animal.put(fly1[0],p1pig)
+def CheckpigEvolution(selectAnimal,s1=5,s2=1,s3=5):
+    if selectAnimal.evolution == None:
+        print('pig')
+        selectAnimal.evolution = True
+        selectAnimal.sleep = s1
+    elif selectAnimal.evolution:
+        selectAnimal.sleep = s2
+        selectAnimal.evolution = False
+        print(selectAnimal.evolution)
+    elif not selectAnimal.evolution:
+        selectAnimal.sleep = s3
+        print('not evolution')
+        selectAnimal.evolution = True
+def OutWhale(selectAnimal,animal,pos,bk):
+    i,j = pos
+    possibleLoad = []
+    for legalPos in [(i+1,j),(i-1,j),(i,j-1),(i,j+1)]: 
+        if exist(legalPos, animal.board,bk.board):
+            possibleLoad.append(legalPos)
+    for idx in range(len(selectAnimal.filling)):
+        animal.put(possibleLoad[idx],selectAnimal.filling[idx])
+    selectAnimal.filling = []
