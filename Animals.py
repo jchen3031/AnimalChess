@@ -22,12 +22,6 @@ class animal(object):
         b[3][0] = 4
         b[3][8] = 4
         b[3][4] = 4
-        # b[3][1] = 2
-        # b[4][0] = 2
-        # b[2][0] = 2
-        # b[3][7] = 3
-        # b[4][8] = 3
-        # b[2][8] = 3
         self.background = b
     def __str__(self):
         return str(self.V) +' ' +str(self.player)
@@ -52,10 +46,12 @@ class GoldFish(animal):
         y = self.y
         b = self.b
         bk = self.background
-        probState = util.basicMove(x,y,b,bk,self.player,self.V,0)
+        probState = util.basicMove(x,y,b,bk,self.player,self.V,0,2)
         for i in range(bk.shape[0]):
             for j in range(bk.shape[1]):
-                if bk[i][j]==1 and (i != x or y!=j):
+                if bk[i][j]== 1 and (i != x or y!=j):
+                    if b[i,j] !=None and b[i,j].V == 2:
+                        continue
                     probState.append((i,j))
         return probState
 class Chick(animal):
@@ -73,7 +69,7 @@ class Goose(animal):
     def __init__(self, player):
         animal.__init__(self,player)
         self.V = 4
-        self.evolution = 15
+        self.evolution = 10
     def possibleWay(self):
         x = self.x
         y = self.y
